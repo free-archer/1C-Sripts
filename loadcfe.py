@@ -1,6 +1,7 @@
 import os
 import shutil
 import subprocess
+import time
 
 VER = "8.3.23.2040"
 CF_FILES = "C:/TEMP/CF"
@@ -18,6 +19,7 @@ if os.path.exists(CF_FILES):
 ProgramFiles = os.environ["ProgramFiles"]
 
 ibcmd = f'"{ProgramFiles}/1cv8/{VER}/bin/ibcmd.exe"'
+c1cmd = f'"{ProgramFiles}/1cv8/{VER}/bin/1cv8.exe"'
 
 print("Загрузка конфигурации")
 Command = "export"
@@ -37,4 +39,12 @@ try:
     procc = subprocess.check_output(start_command, shell=True)
 except:
     print("Ошибка обновления базы данных")
+
+print("Запуск 1С")
+args = f'ENTERPRISE /S{SRV}\\{BASE} /N"{USER}" /P{PASS}'
+start_command = f"{c1cmd} {args}"
+try:
+    procc = subprocess.check_output(start_command, shell=True)
+except:
+    print("Ошибка запуска 1С")    
 
