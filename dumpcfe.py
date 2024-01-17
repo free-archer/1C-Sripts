@@ -1,6 +1,7 @@
 import os
 import shutil
 import subprocess
+import time
 
 VER = "8.3.23.2040"
 CF_FILES = "C:/TEMP/CF"
@@ -14,6 +15,8 @@ EXT_NAME = "НовогоднееОформление"
 
 if os.path.exists(CF_FILES):
     shutil.rmtree(CF_FILES)
+
+start_time = time.time()
 
 ProgramFiles = os.environ["ProgramFiles"]
 
@@ -29,5 +32,9 @@ try:
     procc = subprocess.check_output(start_command, shell=True)
 except:
     print("error")
+
+end_time = time.time()
+elapsed_time = end_time - start_time
+print('Длительность: ', elapsed_time)
 
 

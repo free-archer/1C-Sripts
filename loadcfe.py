@@ -16,6 +16,8 @@ EXT_NAME = "НовогоднееОформление"
 if os.path.exists(CF_FILES):
     shutil.rmtree(CF_FILES)
 
+start_time = time.time()
+
 ProgramFiles = os.environ["ProgramFiles"]
 
 ibcmd = f'"{ProgramFiles}/1cv8/{VER}/bin/ibcmd.exe"'
@@ -39,6 +41,11 @@ try:
     procc = subprocess.check_output(start_command, shell=True)
 except:
     print("Ошибка обновления базы данных")
+
+end_time = time.time()
+elapsed_time = end_time - start_time
+print('Длительность: ', elapsed_time)
+
 
 print("Запуск 1С")
 args = f'ENTERPRISE /S{SRV}\\{BASE} /N"{USER}" /P{PASS}'
